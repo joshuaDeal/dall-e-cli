@@ -110,5 +110,5 @@ def main():
 	else:
 		saveImage(generateImage(prompt, model, size, quality), fileName)
 
-
-main()
+if __name__ == "__main()__":
+	main()
