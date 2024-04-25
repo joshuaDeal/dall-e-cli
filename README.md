@@ -19,7 +19,7 @@ Options:
 Try running `dall-e-cli.py -p "Anime style. A young female programmer testing her code for bugs." -o ./output.png -m dall-e-3`
 The program will wait for a short period of time and after it finishes a new file called "output.png" will be created in the working directory.
 The resulting image should look something like the following.
-<img src="https://travis-ci.org/dylanaraps/fff.svg?branch=master" alt="This image is just a placeholder.">
+<img src="./example-images/example01.png" alt="This image is an example.">
 
 ## Dependencies
 The following are dependencies that you may need to install.
