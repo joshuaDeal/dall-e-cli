@@ -21,6 +21,32 @@ def printHelp():
 	print("\t--quality <quality>\tSpecify image quality.")
 	print("\t--output <file name>\tSpecify where to save the image.")
 
+# Evaluate options and arguments
+def evalArguments():
+	# Defalt values
+	output = {'model': 'dall-e-2', 'size': '1024x1024', 'quality': 'standard', 'fileName': 'dalle-image.png'}
+
+	for i in range(len(sys.argv)):
+		# Check for -h
+		if sys.argv[i] == '--help' or sys.argv[i] == '-h':
+			printHelp()
+			sys.exit()
+		# Get prompt
+		elif sys.argv[i] == '--prompt' or sys.argv[i] == '-p':
+			output['prompt'] = sys.argv[i+1]
+		# Get model
+		elif sys.argv[i] == '--model' or sys.argv[i] == '-m':
+			output['model'] = sys.argv[i+1]
+		# Get size
+		elif sys.argv[i] == '--size' or sys.argv[i] == '-s':
+			output['size'] = sys.argv[i+1]
+		# Get quality
+		elif sys.argv[i] == '--quality' or sys.argv[i] == '-q':
+			output['quality'] = sys.argv[i+1]
+		# Get file name
+		elif sys.argv[i] == '--output' or sys.argv[i] == '-o':
+			output['fileName'] = sys.argv[i+1]
+	return output
 
 # Takes details as input. Returns image in base64 format
 def generateImage(userPrompt,imgModel,imgSize,imgQuality):
@@ -76,39 +102,14 @@ def saveImage(content64, fileName):
 		file.write(decoded)
 
 def main():
-	# Some default values
-	model = "dall-e-2"
-	size = "1024x1024"
-	quality = "standard"
-	fileName = "dalle-image.png"
-
 	# Evaluate options and arguments
-	for i in range(len(sys.argv)):
-		# Check for -h
-		if sys.argv[i] == '--help' or sys.argv[i] == '-h':
-			printHelp()
-			sys.exit()
-		# Get prompt
-		elif sys.argv[i] == '--prompt' or sys.argv[i] == '-p':
-			prompt = sys.argv[i+1]
-		# Get model
-		elif sys.argv[i] == '--model' or sys.argv[i] == '-m':
-			model = sys.argv[i+1]
-		# Get size
-		elif sys.argv[i] == '--size' or sys.argv[i] == '-s':
-			size = sys.argv[i+1]
-		# Get quality
-		elif sys.argv[i] == '--quality' or sys.argv[i] == '-q':
-			quality = sys.argv[i+1]
-		# Get file name
-		elif sys.argv[i] == '--output' or sys.argv[i] == '-o':
-			fileName = sys.argv[i+1]
+	arguments = evalArguments()
 
 	# Make sure that we aren't overwriting a preexisting file
-	if os.path.exists(fileName):
-		print("Warning: file \"" + fileName + "\" already exists.")
+	if os.path.exists(arguments['fileName']):
+		print("Warning: file \"" + arguments['fileName'] + "\" already exists.")
 	else:
-		saveImage(generateImage(prompt, model, size, quality), fileName)
+		saveImage(generateImage(arguments['prompt'], arguments['model'], arguments['size'], arguments['quality']), arguments['fileName'])
 
 if __name__ == "__main__":
 	main()
