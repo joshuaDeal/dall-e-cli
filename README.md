@@ -20,6 +20,8 @@ Try running `dall-e-cli.py -p "Anime style. A young female programmer testing he
 The program will wait for a short period of time and after it finishes a new file called "output.png" will be created in the working directory.
 The resulting image should look something like the following.
 <img src="./example-images/example01.png" alt="This image is an example." width="50%">
+Also, try `dall-e-cli.py -p "Grassy green hills under a bright blue sky."`
+A new file called "dalle-image.png" will be created in the working directory. It should be somewhat similar to the following.
 
 ## Dependencies
 The following are dependencies that you may need to install.
